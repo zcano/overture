@@ -20,8 +20,9 @@
     </h4>
     </div>
 </div>
-<%if (searchtype=='users') {
-results.forEach(function(result) { %>
+<%if (searchtype=='users') { %>
+<%if (results.length>0) { %>
+<%results.forEach(function(result) { %>
 <a href="/<%= result.username %>">
 <div class="row mt-4 mx-4 py-2">
     <div class="col">
@@ -41,8 +42,18 @@ results.forEach(function(result) { %>
     </div>
 </div>
 </a>
-<% }); } else if (searchtype=='songs') {
-results.forEach(function(result) { %>
+<% }); } else { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                No Users Found.
+            </h5>
+        </div>
+    </div>
+<% } %>
+<%} else if (searchtype=='songs') { %>
+<%if (results.length>0) { %>
+<%results.forEach(function(result) { %>
 <a href="/song/<%= result.id %>">
 <div class="row mt-4 mx-4 py-2">
     <div class="col">
@@ -58,8 +69,18 @@ results.forEach(function(result) { %>
     </div>
 </div>
 </a>
-<% }); } else if (searchtype=='albums') {
-results.forEach(function(result) { %>
+<% }); } else { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                No Songs Found.
+            </h5>
+        </div>
+    </div>
+<% } %>
+<%} else if (searchtype=='albums') { %>
+<%if (results.length>0) { %>
+<% results.forEach(function(result) { %>
 <a href="/album/<%= result.id %>">
 <div class="row mt-4 mx-4 py-2">
     <div class="col">
@@ -75,4 +96,13 @@ results.forEach(function(result) { %>
     </div>
 </div>
 </a>
-<% }); } %>
+<% }); } else { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                No Albums Found.
+            </h5>
+        </div>
+    </div>
+<% } %>
+<% } %>
