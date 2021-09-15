@@ -1,0 +1,78 @@
+<div class="row border-bottom mt-4 mx-4">
+    <div class="col-7 text-left">
+        <h4>
+            SEARCH FOR
+            <% 
+            var searchShort = search.toUpperCase().substring(0,20)
+            if (searchShort!=search.toUpperCase())
+                searchShort+='...'
+            %>
+            <%= searchShort %>
+        </h4>
+    </div>
+    <div class="col text-right">
+    <h4>
+        <a href="/search?Search=<%= search %>&type=songs" class="<%if (searchtype=='songs'){%>selected<%}%>">SONGS</a>
+        |
+        <a href="/search?Search=<%= search %>&type=albums" class="<%if (searchtype=='albums'){%>selected<%}%>">ALBUMS</a>
+        |
+        <a href="/search?Search=<%= search %>&type=users" class="<%if (searchtype=='users'){%>selected<%}%>">USERS</a>
+    </h4>
+    </div>
+</div>
+<%if (searchtype=='users') {
+results.forEach(function(result) { %>
+<a href="/<%= result.username %>">
+<div class="row mt-4 mx-4 py-2">
+    <div class="col">
+        <div class="media">
+            <div class="avatarframe2 rounded mr-3">
+                <%if (result.customphoto) { %>
+                <img class="avatar" src="uploads/<%= result.username %>avatar.png">
+                <%} else {%>
+                <img class="avatar" src="uploads/default.png">
+                <%}%> 
+            </div>
+            <div class="media-body">
+              <h4 class="mt-0"><%= result.username %></h4>
+              <%= result.friends.length %> Friends
+            </div>
+          </div>
+    </div>
+</div>
+</a>
+<% }); } else if (searchtype=='songs') {
+results.forEach(function(result) { %>
+<a href="/song/<%= result.id %>">
+<div class="row mt-4 mx-4 py-2">
+    <div class="col">
+        <div class="media">
+            <div class="avatarframe2 rounded mr-3">
+                <img class="avatar" src="<%= result.image %>">
+            </div>
+            <div class="media-body">
+                <h4 class="mt-0"><%= result.songname %></h4>
+                <p><%= result.artists.join(', ') %></p>
+            </div>
+        </div>
+    </div>
+</div>
+</a>
+<% }); } else if (searchtype=='albums') {
+results.forEach(function(result) { %>
+<a href="/album/<%= result.id %>">
+<div class="row mt-4 mx-4 py-2">
+    <div class="col">
+        <div class="media">
+            <div class="avatarframe2 rounded mr-3">
+                <img class="avatar" src="<%= result.image %>">
+            </div>
+            <div class="media-body">
+                <h4 class="mt-0"><%= result.albumname %></h4>
+                <p><%= result.artists.join(', ') %></p>
+            </div>
+        </div>
+    </div>
+</div>
+</a>
+<% }); } %>

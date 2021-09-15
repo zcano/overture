@@ -1,0 +1,55 @@
+<div class="row border-bottom mt-4 mx-4">
+    <div class="col-7 text-left">
+        <h4>
+            FRIEND ACTIVITY
+        </h4>
+    </div>
+</div>
+
+<% if (recentreviews.length>0) { %>
+<% recentreviews.reverse().forEach(function(review) { %>
+    <% var ratingsrc2 = review.rating.replace('.', ''); %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <% if (review.type==='track') {%>
+                <a href="/song/<%= review.id %>"><h4><%= review.name %> - <%= review.artists.join(', ')%></h4></a>
+            <% } else if (review.type=='album') {%>
+                <a href="/album/<%= review.id %>"><h4><%= review.name %> - <%= review.artists.join(', ')%></h4></a>
+            <% } %>
+        </div>
+    </div>
+        <div class="row mx-4">
+            <div class="col">
+                <div class="media">
+                    <div class="avatarframe2 rounded mr-3">
+                        <img class="avatar" src="../uploads/<%= review.userphoto %>">
+                    </div>
+                    <div class="media-body text-break">
+                        <h4 class="mt-0">
+                        <a href="/<%= review.username %>"><%= review.username %></a> 
+                        <span class="datetext">&#8226; <%=review.date.toLocaleString('en-US').substr(0, review.date.toLocaleString('en-US').indexOf(','))%></span>
+                        </h4>
+                        <img class="ratingsmall ml-n2" src="../stars/<%=ratingsrc2%>.png">
+                        <p><%= review.review %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<% }); %>
+<% } else if (user.friends.length===0) { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                Add Friends To Show Friends Recent Activity.
+            </h5>
+        </div>
+    </div>
+<% } else { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                No Recent Friend Activity.
+            </h5>
+        </div>
+    </div>
+<% } %>

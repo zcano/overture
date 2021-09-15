@@ -1,0 +1,36 @@
+<div class="row border-bottom mt-4 mx-4">
+    <div class="col-7 text-left">
+        <h4>
+            <a href="/<%=viewuser.username%>"><%=viewuser.username.toUpperCase()%></a>'S FRIENDS
+        </h4>
+    </div>
+</div>
+
+<% if (viewuser.friends.length>0) { %>
+<% userfriends.sort((a,b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0))
+userfriends.forEach(function(friend) { %>
+    <a href="/<%= friend.username %>">
+        <div class="row mt-4 mx-4 py-2">
+            <div class="col">
+                <div class="media">
+                    <div class="avatarframe2 rounded mr-3">
+                        <img class="avatar" src="../uploads/<%=friend.userphoto%>">
+                    </div>
+                    <div class="media-body">
+                      <h4 class="mt-0"><%= friend.username %></h4>
+                      <%= friend.numfriends %> Friends
+                    </div>
+                  </div>
+            </div>
+        </div>
+        </a>
+<% }); %>
+<% } else { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                No Friends.
+            </h5>
+        </div>
+    </div>
+<% } %>

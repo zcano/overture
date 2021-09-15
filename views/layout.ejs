@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- ICONS -->
+    <script src="https://kit.fontawesome.com/f07e27df68.js" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP/CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" />
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@100;300;900&display=swap" rel="stylesheet">
+    <title>Overture</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <div class="container-lg" id="header">
+        <a class="navbar-brand" href="/">
+        <img class="navimg" src="/images/overture.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarcollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">HOME</a>
+            </li>
+            <%if (signedin) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">PROFILE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/activity">ACTIVITY</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle hover" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                INBOX 
+                <%if (user.inbox.length) { %>
+                <i class="fas fa-bell"></i>
+                <% } else { %>
+                <i class="far fa-bell"></i>
+                <% } %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdown">
+                <%if (user.inbox.length) { %>
+                <% user.inbox.forEach(function(message, i) { %>
+                    <% if (message.type === 'friendrequest') {%>
+                      <div class="dropdown-item">
+                        <a class="mr-1 friendrequest" href="/<%= message.from %>">
+                        Friend Request from <%= message.from %>
+                        </a>
+                        <form class="inboxform" action="/add/<%=message.from%>" method="POST">
+                          <button type="submit" class="friendrequestbutton"><i class="fas fa-check-circle"></i></button>
+                        </form>
+                        <form class="inboxform" action="/denyrequest/<%=i%>" method="POST">
+                          <button type="submit" class="friendrequestbutton"><i class="fas fa-times-circle"></i></button>
+                        </form>
+                      </div>
+                    <% } %>
+                <% }); %> 
+                <% } else { %>
+                  <a class="hover dropdown-item">
+                    Inbox Empty!
+                  </a>
+                <% } %>
+              </div>
+            </li>
+            <% } else {%>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/login">LOGIN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/register">REGISTER</a>
+            </li>
+            <% } %>
+          </ul>
+          <form class="form-inline my-2 my-md-0" action="/search" method="get">
+            <input class="form-control" type="text" placeholder="Search Songs, Albums" aria-label="Search" name="Search">
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="background">
+      <div class="container-xl">
+        <%- body %>
+      </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2021 Overture, All Rights Reserved. Music data from <a href="https://www.spotify.com" target="_blank" rel="noopener noreferrer"><b>Spotify</b></a>.</p>
+    </div>  
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

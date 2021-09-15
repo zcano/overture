@@ -1,0 +1,269 @@
+/* 
+Primary - 0f2027
+Secondary - 7d4040
+
+Primary 20% darker - 0b161b
+Primary lighter - b0bfc5
+
+Secondary 50% darker - 3f2020
+*/
+
+
+html, body {
+    height : 100%;
+
+}
+
+html {
+    overflow-y: overlay;
+}
+
+/* Body */
+body {
+    background-color: #0f2027;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: white;
+}
+.background {
+    background: linear-gradient(0deg, rgba(15,32,39,1) 0%, rgba(44,83,100,1) 100%);
+    min-height: calc(100vh - 156px);
+    overflow: auto;
+    margin-bottom: 50px;
+}
+
+/* Nav */
+nav {
+    background-color: #0b161b;
+    font-weight: 600;
+}
+
+/* Border */
+.border-bottom {
+    border-width:5px !important;
+}
+
+/* Text */
+.lead {
+    font-size: 2rem;
+}
+h1 {
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+h4, .h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+h5 {
+    font-size: 1.3rem;
+    font-family: 'Open Sans', sans-serif;
+}
+.selected {
+    color: #b0bfc5;
+    text-decoration: underline;
+}
+a, .a {
+    color: white;
+}
+a:hover, .a:hover {
+    color: #b0bfc5;
+    text-decoration: none;
+}
+label {
+    margin: 0;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.datetext{
+    font-size: 1rem;
+}
+.friendrequest {
+    color: #212529;
+}
+.friendrequest:hover {
+    color: #212529;
+}
+
+/* Card */
+.card {
+    background-color: #0f2027;
+    border-radius: 25px;
+    border: 3px solid #0b161b;
+}
+
+/* Forms */
+.inboxform {
+    display: inline-flex;
+}
+.homesearch {
+    min-width: 350px;
+}
+
+/* Buttons */
+.friendrequestbutton {
+    font-size: 1.35rem;
+    padding: 0;
+    background: none;
+    border: none;
+}
+.favbutton {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    background: none;
+    border: none;
+    color: white;
+}
+.dropdownbutton {
+    padding: 0;
+    background: none;
+    border: none;
+    color: white;
+}
+.btn-pri {
+    color: white;
+    background-color: #0b161b;
+}
+.btn-pri:hover {
+    color: white;
+    background-color: #081014;
+}
+.btn-sec {
+    width:70%;
+    color: white;
+    background-color: #0b161b;
+}
+.btn-sec:hover {
+    color: white;
+    background-color: #081014;
+}
+.imageupload {
+    display: none;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    background: #0b161b;
+    min-height: 50px;
+    line-height:50px;
+}
+
+/* Images */
+.stars {
+    transition: transform .2s;
+}
+.stars:hover {
+    transform: scale(1.05);
+}
+.navimg {
+    width:115px;
+}
+.homeframe {
+    margin: 0 auto;
+    width: 100%;
+    height: 400px;
+}
+.avatarframe {
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    background: #0b161b;
+    padding: 6px;
+}
+.avatarframe2 {
+    height: 75px;
+    width: 75px;
+    background: #0b161b;
+    padding: 4px;
+}
+.avatarframe3 {
+    margin: 0 auto;
+    height: 250px;
+    width: 250px;
+    background: #0b161b;
+    padding: 5px;
+}
+.hover {
+    cursor: pointer;
+}
+.avatar {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.ratingsmall {
+    margin-top: -11px;
+    width: 150px;
+}
+
+/* Container and Grid */
+.container-xl {
+    background: linear-gradient(0deg, rgba(15,32,39,1) 0%, rgba(26,50,60,1) 100%);
+    min-height: calc(100vh - 156px);
+    overflow: auto;
+}
+
+.profilerow {
+    padding: 3rem 10rem;
+    background: #0e1d23
+}
+
+.songrow {
+    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(14,29,35,1) 100%);
+}
+
+@media screen and (max-width: 700px) {
+    .profilerow {
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+    .songcol{
+        padding-top:0!important;
+        padding-bottom:0!important;
+    }
+    .row {
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .container-xl {
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+    .avatarcol {
+        flex-basis: 100%!important;
+    }
+}
+@media screen and (max-width: 890px) {
+    .profilerow {
+        padding-left: 2rem!important;
+        padding-right: 2rem!important;
+    }
+}
+
+/* Modal */
+.modal-content {
+    background: #7d4040;
+}
+
+/* Range */
+.range {
+    width: 230px;
+}
+
+/* Spacing */
+.mt-7 {
+    margin-top: 5rem!important;
+}
+
+.mt-8 {
+    margin-top: 10rem!important;
+}
+
+/* Alerts */
+.alert {
+    margin: 0;
+}

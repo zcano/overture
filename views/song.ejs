@@ -1,0 +1,99 @@
+<script src="../functions/rate.js"></script>
+
+<div class="row mt-5">
+    <div class="col text-center">
+        <div class="avatarframe3 rounded">
+            <img class="avatar" src="<%= song.image %>">
+        </div>
+        <h1 class="mt-4"><%= song.songname %></h1>
+        <h3 class="mt-2 mb-0"><%= song.artists.join(', ')%></h3>
+        <% const ratingsrc = songdata.rating.toString().replace('.', ''); %>
+        <a data-toggle="modal" data-target="#reviewModal">
+            <img class="cursor-pointer stars" src="../stars/<%= ratingsrc %>.png">
+        </a>
+    </div>
+</div>
+
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header d-inline">
+                <% if (reviewexists) { 
+                    var userreview = songdata.reviews.find(review => review.username == user.username);
+                %>
+                <h4 class="modal-title" id="exampleModalLongTitle">UPDATE REVIEW</h4>
+                <% } else {%>
+                <h4 class="modal-title" id="exampleModalLongTitle">NEW REVIEW</h4>
+                <% }%>
+            </div>
+            <% if (signedin) {%>
+            <form action="/song/<%= song.id %>" method="POST">
+            <div class="modal-body">
+                <% if (reviewexists) {%>
+                <img id="ratingimage" src="../stars/<%= userreview.rating.replace('.', '') %>.png">
+                <div class="form-group">
+                    <input type="range" min="0.5" step="0.5" max="5" value="<%= userreview.rating %>" class="range mb-3" id="rating" name="rating" onchange="updateStars(this)">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="review" name="review" rows="5" maxlength="300"><%= userreview.review%></textarea>
+                </div>
+                <% } else {%>
+                <img id="ratingimage" src="../stars/25.png">
+                <div class="form-group">
+                    <input type="range" min="0.5" step="0.5" max="5" value="2.5" class="range mb-3" id="rating" name="rating" onchange="updateStars(this)">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="review" name="review" placeholder="Enter Review" rows="5" maxlength="300"></textarea>
+                </div>
+                <% }%>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-pri" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-pri">Submit</button>
+            </div>
+            </form>
+            <% } else {%>
+            <div class="modal-body">
+                <h5 class="my-5">You must <a href="/users/login"><u>Login</u></a> to review a song!</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-pri" data-dismiss="modal">Close</button>
+            </div>
+            <% }%>
+        </div>
+    </div>
+</div>
+
+<div class="row border-bottom mt-5 pt-5 mx-4">
+    <div class="col">
+        <h4 class="float-right">
+            <form action="/favouritesong/<%= song.id %>" method="POST">
+            <button type="submit" class="a favbutton">SET AS FAVOURITE SONG</button>
+            </form>
+        </h4>
+        <h4 class="float-left">
+            REVIEWS
+        </h4>
+    </div>
+</div>
+
+<% songdata.reviews.reverse().forEach(function(review) { %>
+<% var ratingsrc2 = review.rating.replace('.', ''); %>
+    <div class="row mt-4 mx-4 py-2">
+        <div class="col">
+            <div class="media">
+                <div class="avatarframe2 rounded mr-3">
+                    <img class="avatar" src="../uploads/<%= review.userphoto %>">
+                </div>
+                <div class="media-body text-break">
+                    <h4 class="mt-0">
+                    <a href="/<%= review.username %>"><%= review.username %></a> 
+                    <span class="datetext">&#8226; <%=review.date.toLocaleString('en-US').substr(0, review.date.toLocaleString('en-US').indexOf(','))%></span>
+                    </h4>
+                    <img class="ratingsmall ml-n2" src="../stars/<%=ratingsrc2%>.png">
+                    <p><%= review.review %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>
