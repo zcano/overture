@@ -77,6 +77,7 @@
     </div>
 </div>
 
+<% if (albumdata.reviews.length>0) { %>
 <% albumdata.reviews.reverse().forEach(function(review) { %>
 <% var ratingsrc2 = review.rating.replace('.', ''); %>
     <div class="row mt-4 mx-4 py-2">
@@ -97,3 +98,12 @@
         </div>
     </div>
 <% }); %>
+<% } else { %>
+    <div class="row mt-4 mx-4">
+        <div class="col">
+            <h5>
+                No Reviews, <a class="hover" data-toggle="modal" data-target="#reviewModal"><b>Add a Review</b></a>.
+            </h5>
+        </div>
+    </div>
+<% } %>
