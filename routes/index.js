@@ -58,11 +58,9 @@ router.get('/activity', ensureAuthenticated, async (req, res, next) => {
   //Get friends reviews within filtered date
   await Promise.all(user.friends.map(async friend => {
     var foundfriend = await User.findOne({username: friend});
-
     var currentDate = new Date();
     var temp = currentDate.setDate(currentDate.getDate()- 3);
     var filterDate = new Date(temp);
-
     var userphoto = foundfriend.customphoto ? foundfriend.username+'avatar.png' : 'default.png';
 
     var filteredReviews = []
@@ -72,7 +70,6 @@ router.get('/activity', ensureAuthenticated, async (req, res, next) => {
         filteredReviews.push(review);
       }
     });
-
     recentreviews = recentreviews.concat(filteredReviews)
   }));
   recentreviews.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0))
@@ -208,7 +205,6 @@ router.post('/denyrequest/:index', ensureAuthenticated, (req, res, next) => {
     user.inbox.splice(index, 1);
     user.save();
   }
-
   res.redirect(req.get('referer'));
 });
 

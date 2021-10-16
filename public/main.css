@@ -1,17 +1,5 @@
-/* 
-Primary - 0f2027
-Secondary - 7d4040
-
-Primary 20% darker - 0b161b
-Primary lighter - b0bfc5
-
-Secondary 50% darker - 3f2020
-*/
-
-
 html, body {
     height : 100%;
-
 }
 
 html {
@@ -91,8 +79,9 @@ label {
 /* Card */
 .card {
     background-color: #0f2027;
-    border-radius: 25px;
-    border: 3px solid #0b161b;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 0.5rem 0 black;
 }
 
 /* Forms */
@@ -216,6 +205,32 @@ label {
     background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(14,29,35,1) 100%);
 }
 
+/* Modal */
+.modal-content {
+    background: rgb(43 82 98);
+    border-radius: 1rem;
+}
+
+/* Range */
+.range {
+    width: 230px;
+}
+
+/* Spacing */
+.mt-7 {
+    margin-top: 5rem!important;
+}
+
+.mt-8 {
+    margin-top: 10rem!important;
+}
+
+/* Alerts */
+.alert {
+    margin: 0;
+}
+
+/* Mobile */
 @media screen and (max-width: 700px) {
     .profilerow {
         padding-left: 0!important;
@@ -242,28 +257,4 @@ label {
         padding-left: 2rem!important;
         padding-right: 2rem!important;
     }
-}
-
-/* Modal */
-.modal-content {
-    background: #7d4040;
-}
-
-/* Range */
-.range {
-    width: 230px;
-}
-
-/* Spacing */
-.mt-7 {
-    margin-top: 5rem!important;
-}
-
-.mt-8 {
-    margin-top: 10rem!important;
-}
-
-/* Alerts */
-.alert {
-    margin: 0;
 }

@@ -166,9 +166,6 @@ router.get('/song/:id', (req, res, next) => {
       songdata.reviews[index].userphoto = user.customphoto ? user.username+'avatar.png' : 'default.png';
     }
     
-    console.log(song);
-    console.log(songdata);
-
     //does user already have a review?
     var reviewexists = false;
     if (req.user){
@@ -209,7 +206,6 @@ router.post('/song/:id', ensureAuthenticated, (req, res) => {
       var userreview = { id: songid, username: user.username, rating: rating, review: review, type: 'track', date: new Date() }
       var newrating = 0;
       
-      //Update SongData
       //Update songs review or push new review
       var i = song.reviews.findIndex(review => review.username == user.username);
       if (song.reviews[i]){
@@ -228,7 +224,6 @@ router.post('/song/:id', ensureAuthenticated, (req, res) => {
 
       await song.save();
 
-      //Update User
       //Update user review or push new review
       var x = curuser.reviews.findIndex(review => review.id == songid);
       if (curuser.reviews[x]){
@@ -271,7 +266,6 @@ router.get('/album/:id', (req, res, next) => {
       artists.push(artist.name);
     });
     var image = response.images[1].url;
-    //var album = response.album.name;
 
     album = {id: albumid, albumname: albumname, artists: artists, image: image, type: type}
     var albumdata = await getratingdata(albumid, type);
@@ -281,9 +275,6 @@ router.get('/album/:id', (req, res, next) => {
       var user = await User.findOne({ username: albumdata.reviews[index].username }).catch(err => console.log(err));
       albumdata.reviews[index].userphoto = user.customphoto ? user.username+'avatar.png' : 'default.png';
     }
-    
-    console.log(album);
-    console.log(albumdata);
 
     //does user already have a review?
     var reviewexists = false;
@@ -324,8 +315,7 @@ router.post('/album/:id', ensureAuthenticated, (req, res) => {
       const curuser = await User.findOne({username: user.username});
       var userreview = { id: albumid, username: user.username, rating: rating, review: review, type: 'album', date: new Date() }
       var newrating = 0;
-      
-      //Update SongData
+
       //Update songs review or push new review
       var i = album.reviews.findIndex(review => review.username == user.username);
       if (album.reviews[i]){
@@ -344,7 +334,6 @@ router.post('/album/:id', ensureAuthenticated, (req, res) => {
 
       await album.save();
 
-      //Update User
       //Update user review or push new review
       var x = curuser.reviews.findIndex(review => review.id == albumid);
       if (curuser.reviews[x]){
