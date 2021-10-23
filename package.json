@@ -1,14 +1,14 @@
 {
-  "name": "node_passport_login",
+  "name": "overture",
   "version": "2.0.0",
-  "description": "Node.js authentication with Passport",
+  "description": "Search, rate, and track song reviews with friends.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Zackary Zoccano",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
